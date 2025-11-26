@@ -143,11 +143,11 @@ int main(int argc, char *argv[])
 		switch (resp.type)
 		{
 			case 't':
-				printf("Ricevuto risultato dal server ip %s. %s: Temperatura = %.1f°C", server_ip,req.city, resp.value);
+				printf("Ricevuto risultato dal server ip %s. %s: Temperatura = %.1f°C\n", server_ip,req.city, resp.value);
 			break;
 
 			case 'h':
-				printf("Ricevuto risultato dal server ip %s. %s: Umidita' = %.1f%", server_ip, req.city, resp.value);
+				printf("Ricevuto risultato dal server ip %s. %s: Umidita' = %.1f%%\n", server_ip, req.city, resp.value);
 				break;
 
 			case 'w':
