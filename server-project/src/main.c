@@ -18,8 +18,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #define closesocket close
+typedef int socklen_t;
 #endif
-
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

@@ -18,8 +18,9 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #define closesocket close
+typedef int socklen_t;
 #endif
-
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "protocol.h"
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
 		}
 		else if(strcmp(argv[i],"-r")==0 && i+1<argc)
 		{
-			if (sscanf(argv[++i],"%c %63s", &req.type, &req.city) !=2)
+			if (sscanf(argv[++i]," %c %63s", &req.type, req.city) !=2)
 			{
 				usage(argv[0]);
 				return 1;
@@ -115,7 +116,7 @@ int main(int argc, char *argv[])
 	memset(&sad, 0, sizeof(sad));
 	sad.sin_family = AF_INET;
 	sad.sin_addr.s_addr = inet_addr(server_ip); // IP del server
-	sad.sin_port = htons(SERVER_PORT); // Server port
+	sad.sin_port = htons(port); // Server port
 
 	//Connect to server
 	if (connect(c_socket, (struct sockaddr*) &sad, sizeof(sad)) < 0) {
