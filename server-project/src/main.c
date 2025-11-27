@@ -18,7 +18,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #define closesocket close
-typedef unsigned int socklen_t
+typedef unsigned int socklen_t;
 #endif
 #include <ctype.h>
 #include <stdio.h>
@@ -165,8 +165,7 @@ int main(int argc, char *argv[])
 			errorhandler("accept() fallita.\n");
 			// close connection
 			closesocket(client_socket);
-			clearwinsock();
-			return 0;
+			continue;  //al posto di return 0; e clearwinsock
 		}
 
     //ricezione messaggio client
@@ -174,8 +173,7 @@ int main(int argc, char *argv[])
         {
 			errorhandler("recv() fallita.\n");
 			closesocket(client_socket);
-			clearwinsock();
-			return -1;
+			continue; //al posto di return -1
 		}
     //visualizza il messaggio: Richiesta '<type><city?>' dal client ip <ip_client>
     printf("Richiesta %c %s dal client ip %s\n",req.type,req.city, inet_ntoa(cad.sin_addr));
@@ -218,8 +216,7 @@ if (!valid_type(req.type))
         {
 			errorhandler("send() fallita\n");
 			closesocket(client_socket);
-			clearwinsock();
-			return -1;
+			continue; //return-1;
 		}
         // Chiudi connessione client
         closesocket(client_socket);
