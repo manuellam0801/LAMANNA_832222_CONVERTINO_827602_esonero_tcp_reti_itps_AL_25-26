@@ -18,6 +18,7 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #define closesocket close
+typedef unsigned int socklen_t
 #endif
 #include <ctype.h>
 #include <stdio.h>
@@ -116,6 +117,11 @@ int main(int argc, char *argv[])
 		}
     #endif
 
+	if (argc > 2 && strcmp(argv[1], "-p") == 0)
+	{
+	        port = atoi(argv[2]);
+	}
+
 	//Create socket
 	int my_socket;
 	my_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -154,7 +160,7 @@ int main(int argc, char *argv[])
 	while (1)
     {
 		client_len = sizeof(cad); // set the size of the client address
-		if ((client_socket = accept(my_socket, (struct sockaddr*) &cad,&client_len)) < 0)
+		if ((client_socket = accept(my_socket, (struct sockaddr*) &cad,(socklen_t*)&client_len)) < 0)
         {
 			errorhandler("accept() fallita.\n");
 			// close connection
